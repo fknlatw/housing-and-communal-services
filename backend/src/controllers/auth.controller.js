@@ -1,6 +1,9 @@
 import db from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 class AuthController {
   signin(req,res){
@@ -21,9 +24,9 @@ class AuthController {
 
         if(!isValid) return res.status(400).json({message: "Неверный пароль"});
 
-        const token = `Bearer ${jwt.sign({id: user.id}, "secret", {expiresIn: "1h"})}`;
+        const token = `Bearer ${jwt.sign({id: user.id}, "secret", {expiresIn: "2h"})}`;
 
-        res.cookie("token", token);
+        res.cookie("token", token, {httpOnly: true, maxAge: 2 * 60 * 60 * 1000});
         return res.json({message: `Авторизация пользователя ${username} прошла успешно`});
       })
     });
