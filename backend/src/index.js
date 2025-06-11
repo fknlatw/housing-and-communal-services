@@ -27,7 +27,7 @@ app.listen(PORT, () => {
       "CREATE SCHEMA IF NOT EXISTS `housing-and-communal-services`";
 
     const usersTableQuery =
-      'CREATE TABLE IF NOT EXISTS `users` (`id` INT AUTO_INCREMENT PRIMARY KEY, `role` ENUM("tenant", "admin") NOT NULL, `password` VARCHAR(255) NOT NULL, `username` VARCHAR(255) NOT NULL)';
+      'CREATE TABLE IF NOT EXISTS `users` (`id` INT AUTO_INCREMENT PRIMARY KEY, `role` ENUM("tenant", "admin") NOT NULL DEFAULT "tenant", `password` VARCHAR(255) NOT NULL, `username` VARCHAR(255) NOT NULL)';
 
     const requestsTableQuery = 'CREATE TABLE IF NOT EXISTS `requests` (`id` INT AUTO_INCREMENT PRIMARY KEY, `description` VARCHAR(510) NOT NULL, `category` varchar(255) NOT NULL, `priority` ENUM("low", "medium", "high") NOT NULL, `status` ENUM("new", "in_progress", "completed") NOT NULL, `date` VARCHAR(255) NOT NULL, `files` JSON, `comments` JSON)';
 
